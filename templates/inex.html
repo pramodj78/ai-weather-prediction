@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+AI Weather Predictor
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at top left,
+        #2563eb,
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at bottom right,
+        #7c3aed,
+        transparent 30%
+    ),
+    #020617;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+}
+
+/* MAIN CARD */
+
+.container{
+
+    width:100%;
+
+    max-width:550px;
+
+    background:rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    border:1px solid rgba(
+        255,
+        255,
+        255,
+        0.12
+    );
+
+    backdrop-filter:blur(25px);
+
+    border-radius:35px;
+
+    padding:40px;
+
+    box-shadow:
+    0 20px 60px rgba(
+        0,
+        0,
+        0,
+        0.55
+    );
+}
+
+/* HEADER */
+
+.logo{
+
+    text-align:center;
+
+    font-size:75px;
+
+    margin-bottom:15px;
+}
+
+h1{
+
+    text-align:center;
+
+    font-size:44px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #60a5fa,
+        #c084fc
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#cbd5e1;
+
+    margin-bottom:35px;
+
+    line-height:1.7;
+}
+
+/* INPUT BOX */
+
+.input-box{
+
+    margin-bottom:20px;
+}
+
+input{
+
+    width:100%;
+
+    padding:17px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:16px;
+
+    background:rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    border:1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    color:white;
+
+    font-size:15px;
+
+    transition:0.3s;
+}
+
+input:focus{
+
+    border-color:#60a5fa;
+
+    transform:scale(1.01);
+
+    box-shadow:
+    0 0 20px rgba(
+        96,
+        165,
+        250,
+        0.25
+    );
+}
+
+input::placeholder{
+
+    color:#cbd5e1;
+}
+
+/* RANGE TEXT */
+
+small{
+
+    display:block;
+
+    margin-top:8px;
+
+    margin-left:5px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+}
+
+/* BUTTON */
+
+button{
+
+    width:100%;
+
+    padding:18px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #3b82f6,
+        #8b5cf6
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 10px 30px rgba(
+        139,
+        92,
+        246,
+        0.4
+    );
+}
+
+button:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.02);
+}
+
+/* RESULT */
+
+.result{
+
+    margin-top:30px;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    text-align:center;
+
+    border:1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+}
+
+.result h3{
+
+    color:#cbd5e1;
+
+    margin-bottom:14px;
+
+    font-size:18px;
+}
+
+.result h2{
+
+    color:#22c55e;
+
+    font-size:38px;
+
+    font-weight:800;
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:25px;
+    }
+
+    h1{
+
+        font-size:34px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+🌦
+</div>
+
+<h1>
+AI Weather Predictor
+</h1>
+
+<p class="subtitle">
+
+Predict weather conditions using
+Machine Learning and Artificial Intelligence
+
+</p>
+
+<form method="POST">
+
+<!-- TEMPERATURE -->
+
+<div class="input-box">
+
+<input
+type="number"
+step="any"
+name="temp"
+placeholder="🌡 Temperature (°C)"
+required>
+
+<small>
+Range: -20 to 50 °C
+</small>
+
+</div>
+
+<!-- HUMIDITY -->
+
+<div class="input-box">
+
+<input
+type="number"
+step="any"
+name="humidity"
+placeholder="💧 Humidity (%)"
+required>
+
+<small>
+Range: 0 to 100 %
+</small>
+
+</div>
+
+<!-- WIND -->
+
+<div class="input-box">
+
+<input
+type="number"
+step="any"
+name="wind"
+placeholder="🌪 Wind Speed (km/h)"
+required>
+
+<small>
+Range: 0 to 150 km/h
+</small>
+
+</div>
+
+<!-- VISIBILITY -->
+
+<div class="input-box">
+
+<input
+type="number"
+step="any"
+name="visibility"
+placeholder="👁 Visibility (km)"
+required>
+
+<small>
+Range: 0 to 20 km
+</small>
+
+</div>
+
+<!-- PRESSURE -->
+
+<div class="input-box">
+
+<input
+type="number"
+step="any"
+name="pressure"
+placeholder="📊 Pressure (kPa)"
+required>
+
+<small>
+Range: 80 to 110 kPa
+</small>
+
+</div>
+
+<!-- BUTTON -->
+
+<button type="submit">
+
+✨ Predict Weather
+
+</button>
+
+</form>
+
+<!-- RESULT -->
+
+{% if prediction %}
+
+<div class="result">
+
+<h3>
+Predicted Weather
+</h3>
+
+<h2>
+{{ prediction }}
+</h2>
+
+</div>
+
+{% endif %}
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+Powered by Machine Learning • Flask • Random Forest
+
+</div>
+
+</div>
+
+</body>
+
+</html>
